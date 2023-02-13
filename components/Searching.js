@@ -8,6 +8,12 @@ export default function Searching() {
     return (
         <View style={{ marginTop: 15, flexDirection: "row" }}>
             <GooglePlacesAutocomplete
+                // query={{key:""}}
+                // onPress={(data, details = null) => {
+                //     console.log(data.description);
+                //     const city = data.description.split(",")[0];
+                //     cityHandler(city);
+                // }}
                 placeholder='search'
                 styles={{
                     textInput: {
