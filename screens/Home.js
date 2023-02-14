@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, ScrollView } from 'react-native'
-import HeaderTabs from '../components/HeaderTabs'
-import Searching from '../components/Searching'
-import Catagories from '../components/Catagories'
-import RestaurantItems, { localRestaurants } from '../components/RestaurantItems'
+import HeaderTabs from '../components/Home/HeaderTabs'
+import Searching from '../components/Home/Searching'
+import Catagories from '../components/Home/Catagories'
+import RestaurantItems, { localRestaurants } from '../components/Home/RestaurantItems'
+import ButtonTabs from "../components/Home/ButtonTabs";
 
 const YELP_API_KEY =
   "bdRJutLhFAQJ36t7b89CWjHFBU4OKzjt9wvZzcY-nkgmvTqlNMjZWV1eG7iBQ9R74SyfxRg9LWnBAkZY06BtAZAe4d2dfX-2vuX8a1l5V7foctHfX9UKEyoM5ts3YXYx";
@@ -44,6 +45,7 @@ export default function Home() {
         <Catagories />
         <RestaurantItems restaurantsData={restaurantData} />
       </ScrollView>
+      <ButtonTabs />
     </SafeAreaView>
   )
 }
