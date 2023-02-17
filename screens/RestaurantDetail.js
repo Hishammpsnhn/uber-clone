@@ -4,10 +4,10 @@ import About from '../components/RestaurantDetail/About'
 import { Divider } from "react-native-elements";
 import MenuItems from '../components/RestaurantDetail/MenuItems';
 
-export default function RestaurantDetail() {
+export default function RestaurantDetail(props) {
   return (
     <View style={{flex:1}}>
-        <About/>
+        <About props={props}/>
         <Divider width={1.8} style={{ marginVertical: 20 }} />
         <MenuItems/>
     </View>

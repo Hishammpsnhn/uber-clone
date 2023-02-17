@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import React from 'react'
+import { Divider } from 'react-native-elements';
 
 const menuItems =
     [{
@@ -40,15 +41,22 @@ const menuItems =
 
 export default function MenuItems() {
     return (
-        <ScrollView  showsVerticalScrollIndicator={false}>
-            {menuItems.map((item,i) => (
-                <View key={i}>
-                    <View style={styles.menuItemStyle}>
-                        <MenuItemInfo food={item} />
-                        <MenuItemImage food={item} />
+        <ScrollView showsVerticalScrollIndicator={false}>
+            {menuItems.map((item, i) => (
+                <View>
+                    <View key={i}>
+                        <View style={styles.menuItemStyle}>
+                            <MenuItemInfo food={item} />
+                            <MenuItemImage food={item} />
+                        </View>
                     </View>
+                    <Divider
+                        width={0.5}
+                        orientation="vertical"
+                        style={{ marginHorizontal: 20 }}
+                    />
                 </View>
-                ))}
+            ))}
         </ScrollView>
     )
 }

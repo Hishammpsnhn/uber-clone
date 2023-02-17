@@ -1,17 +1,16 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 
-export default function About() {
-    const name = "Beachside Bar"
-    const desc = "Thai * comfort Food * $$ * $$ * 4 .. (2913+) *"
-    const image =
-        "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg"
-
+export default function About({ props }) {
+    const { name, image, categories, price, reviews, rating } = props.route.params;
+    const formattedCategories = categories.map((cat) => cat.title).join(" • ");
+    const description = `${formattedCategories} ${price ? " • " + price : ""
+        } • 🎫 • ${rating} ⭐ (${reviews}+)`;
     return (
         <View>
             <RestauantImage image={image} />
             <RestauantName name={name} />
-            <RestauantDescription desc={desc} />
+            <RestauantDescription desc={description} />
         </View>
     )
 }
