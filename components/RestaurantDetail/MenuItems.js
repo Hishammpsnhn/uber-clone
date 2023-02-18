@@ -1,43 +1,42 @@
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import React from 'react'
 import { Divider } from 'react-native-elements';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 
 const menuItems =
     [{
-        name: "Beachside",
+        name: "Chicken Fry",
         image:
-            "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
+            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
         price: "$$",
         reviews: 1244,
         rating: 4.5,
     }, {
-        name: "Beachside",
+        name: "Chicken Fry",
         image:
-            "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
+            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
         price: "$$",
         reviews: 1244,
         rating: 4.5,
     }, {
-        name: "Beachside",
+        name: "Chicken Fry",
         image:
-            "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
+            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
         price: "$$",
         reviews: 1244,
         rating: 4.5,
     }, {
-        name: "Beachside",
+        name: "Chicken Fry",
         image:
-            "https://static.onecms.io/wp-content/uploads/sites/9/2020/04/24/ppp-why-wont-anyone-rescue-restaurants-FT-BLOG0420.jpg",
+            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
         price: "$$",
         reviews: 1244,
         rating: 4.5,
     }]
-
-
 
 export default function MenuItems() {
     return (
@@ -46,6 +45,10 @@ export default function MenuItems() {
                 <View>
                     <View key={i}>
                         <View style={styles.menuItemStyle}>
+                            <BouncyCheckbox
+                                iconStyle={{ borderColor: "lightgray", borderRadius: 0, }}
+                                fillColor="green"
+                            />
                             <MenuItemInfo food={item} />
                             <MenuItemImage food={item} />
                         </View>

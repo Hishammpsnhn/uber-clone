@@ -3,6 +3,7 @@ import React from 'react'
 import About from '../components/RestaurantDetail/About'
 import { Divider } from "react-native-elements";
 import MenuItems from '../components/RestaurantDetail/MenuItems';
+import ViewCart from '../components/RestaurantDetail/ViewCart';
 
 export default function RestaurantDetail(props) {
   return (
@@ -10,6 +11,7 @@ export default function RestaurantDetail(props) {
         <About props={props}/>
         <Divider width={1.8} style={{ marginVertical: 20 }} />
         <MenuItems/>
+        <ViewCart/>
     </View>
   )
 }
