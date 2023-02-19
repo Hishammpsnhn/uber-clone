@@ -2,43 +2,65 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native'
 import React from 'react'
 import { Divider } from 'react-native-elements';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import { useDispatch, useSelector } from 'react-redux';
 
 const menuItems =
     [{
+        id: 1,
         name: "Chicken Fry",
         image:
             "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
-        price: "$$",
+        price: "$4.5",
         reviews: 1244,
         rating: 4.5,
     }, {
+        id: 2,
         name: "Chicken Fry",
         image:
             "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
-        price: "$$",
+        price: "$2.50",
         reviews: 1244,
         rating: 4.5,
     }, {
+        id: 3,
         name: "Chicken Fry",
         image:
             "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
-        price: "$$",
+        price: "$10.5",
         reviews: 1244,
         rating: 4.5,
     }, {
+        id: 4,
         name: "Chicken Fry",
         image:
             "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
         categories: ["Cafe", "Bar"],
-        price: "$$",
+        price: "$15.5",
         reviews: 1244,
         rating: 4.5,
     }]
 
-export default function MenuItems() {
+export default function MenuItems({ restaurantname }) {
+    const dispatch = useDispatch();
+    const selectedItem = (item, checkboxValue) =>
+        dispatch({
+            type: "ADD_TO_CART",
+            payload: {
+                ...item,
+                restaurantName: restaurantname,
+                checkboxValue: checkboxValue
+            },
+        })
+
+    const cartItems = useSelector(
+        (state) => state.cartReducer.selectedItems.items
+    );
+
+    const isFoodInCart = (food, cartItems) =>
+        Boolean(cartItems.find((item) => item.id === food.id));
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {menuItems.map((item, i) => (
@@ -48,6 +70,8 @@ export default function MenuItems() {
                             <BouncyCheckbox
                                 iconStyle={{ borderColor: "lightgray", borderRadius: 0, }}
                                 fillColor="green"
+                                isChecked={isFoodInCart(item, cartItems)}
+                                onPress={(checkboxValue) => selectedItem(item, checkboxValue)}
                             />
                             <MenuItemInfo food={item} />
                             <MenuItemImage food={item} />

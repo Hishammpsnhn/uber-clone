@@ -10,7 +10,7 @@ export default function RestaurantDetail(props) {
     <View style={{flex:1}}>
         <About props={props}/>
         <Divider width={1.8} style={{ marginVertical: 20 }} />
-        <MenuItems/>
+        <MenuItems restaurantname={props.route.params.name} />
         <ViewCart/>
     </View>
   )
