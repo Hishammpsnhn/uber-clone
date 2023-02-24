@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector } from 'react-redux';
 import OrderItem from './OrderedItem';
 
-export default function ViewCart() {
+export default function ViewCart({navigation}) {
     const [modalVisible, setModalVisible] = useState(false);
     console.log(modalVisible);
 
@@ -19,41 +19,46 @@ export default function ViewCart() {
         style: "currency",
         currency: "USD",
     });
-    
-  const styles = StyleSheet.create({
-    modalContainer: {
-      flex: 1,
-      justifyContent: "flex-end",
-      backgroundColor: "rgba(0,0,0,0.7)",
-    },
 
-    modalCheckoutContainer: {
-      backgroundColor: "white",
-      padding: 16,
-      height: 500,
-      borderWidth: 1,
-    },
+    const checkOut = () => {
+        setModalVisible(false)
+        navigation.navigate("OrderCompleted");
+    }
+    const styles = StyleSheet.create({
+        modalContainer: {
+            flex: 1,
+            justifyContent: "flex-end",
+            backgroundColor: "rgba(0,0,0,0.7)",
+        },
 
-    restaurantName: {
-      textAlign: "center",
-      fontWeight: "600",
-      fontSize: 18,
-      marginBottom: 10,
-    },
+        modalCheckoutContainer: {
+            backgroundColor: "white",
+            padding: 16,
+            height: 500,
+            borderWidth: 1,
+        },
 
-    subtotalContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      marginTop: 15,
-    },
+        restaurantName: {
+            textAlign: "center",
+            fontWeight: "600",
+            fontSize: 18,
+            marginBottom: 10,
+        },
 
-    subtotalText: {
-      textAlign: "left",
-      fontWeight: "600",
-      fontSize: 15,
-      marginBottom: 10,
-    },
-  });
+        subtotalContainer: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginTop: 15,
+        },
+
+        subtotalText: {
+            textAlign: "left",
+            fontWeight: "600",
+            fontSize: 15,
+            marginBottom: 10,
+        },
+    });
+    const onPress = () => console.log("Press");
 
     const checkoutModalContent = () => {
         return (
@@ -61,13 +66,13 @@ export default function ViewCart() {
                 <View style={styles.modalContainer}>
                     <View style={styles.modalCheckoutContainer}>
                         <Text style={styles.restaurantName}>{restaurantName}</Text>
-                        
+
                         {items.map((item, index) => (
                             <OrderItem key={index} item={item} />
                         ))}
                         <View style={styles.subtotalContainer}>
                             <Text style={styles.subtotalText}>Subtotal</Text>
-                            <Text>{totalUSD}</Text>
+                            <Text>${totalUSD}</Text>
                         </View>
                         <View style={{ flexDirection: "row", justifyContent: "center" }}>
                             <TouchableOpacity
@@ -80,6 +85,9 @@ export default function ViewCart() {
                                     width: 300,
                                     position: "relative",
                                 }}
+                                onPress={() => {
+                                    setModalVisible(false)
+                                  }}
                             >
                                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
                                 <Text
@@ -114,7 +122,7 @@ export default function ViewCart() {
             {total ? (
                 <View
                     style={{
-                        
+
                         alignItems: "center",
                         justifyContent: "center",
                         flexDirection: "row",
@@ -139,10 +147,13 @@ export default function ViewCart() {
                                 padding: 15,
                                 borderRadius: 30,
                                 width: 300,
-                                
+
 
                             }}
-                            onPress={() => setModalVisible(true)}
+                            onPress={() => {
+                                setModalVisible(true)
+                                console.log("Press")
+                              }}
                         >
                             <Text style={{ color: "white", fontSize: 20, marginRight: 40 }}>
                                 View Cart

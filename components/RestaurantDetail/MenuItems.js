@@ -64,8 +64,8 @@ export default function MenuItems({ restaurantname }) {
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             {menuItems.map((item, i) => (
-                <View>
-                    <View key={i}>
+                <View key={i}>
+                    <View >
                         <View style={styles.menuItemStyle}>
                             <BouncyCheckbox
                                 iconStyle={{ borderColor: "lightgray", borderRadius: 0, }}
