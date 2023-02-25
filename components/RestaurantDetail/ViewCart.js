@@ -1,13 +1,12 @@
-import { View, Text, Modal, StyleSheet } from 'react-native'
+import { View, Text, Modal, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useSelector } from 'react-redux';
 import OrderItem from './OrderedItem';
+import LottieView from "lottie-react-native";
 
-export default function ViewCart({navigation}) {
+export default function ViewCart({ navigation }) {
     const [modalVisible, setModalVisible] = useState(false);
-    console.log(modalVisible);
-
+    const [loading,setLoading] = useState(false);
     const { items, restaurantName } = useSelector(
         (state) => state.cartReducer.selectedItems
     );
@@ -20,9 +19,14 @@ export default function ViewCart({navigation}) {
         currency: "USD",
     });
 
-    const checkOut = () => {
+    const handleCheckout = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            navigation.navigate("OrderCompleted");
+        }, 2500);
         setModalVisible(false)
-        navigation.navigate("OrderCompleted");
+
     }
     const styles = StyleSheet.create({
         modalContainer: {
@@ -58,7 +62,7 @@ export default function ViewCart({navigation}) {
             marginBottom: 10,
         },
     });
-    const onPress = () => console.log("Press");
+
 
     const checkoutModalContent = () => {
         return (
@@ -85,9 +89,7 @@ export default function ViewCart({navigation}) {
                                     width: 300,
                                     position: "relative",
                                 }}
-                                onPress={() => {
-                                    setModalVisible(false)
-                                  }}
+                                onPress={() => handleCheckout()}
                             >
                                 <Text style={{ color: "white", fontSize: 20 }}>Checkout</Text>
                                 <Text
@@ -150,10 +152,7 @@ export default function ViewCart({navigation}) {
 
 
                             }}
-                            onPress={() => {
-                                setModalVisible(true)
-                                console.log("Press")
-                              }}
+                            onPress={() => setModalVisible(true)}
                         >
                             <Text style={{ color: "white", fontSize: 20, marginRight: 40 }}>
                                 View Cart
@@ -165,6 +164,28 @@ export default function ViewCart({navigation}) {
             ) : (
                 <></>
             )}
+              {loading ? (
+        <View
+          style={{
+            backgroundColor: "black",
+            position: "absolute",
+            opacity: 0.6,
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <LottieView
+            style={{ height: 200 }}
+            source={require("../../assets/animations/scanner.json")}
+            autoPlay
+            speed={3}
+          />
+        </View>
+      ) : (
+        <></>
+      )}
         </>
     )
 }

@@ -4,46 +4,10 @@ import { Divider } from 'react-native-elements';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 
-const menuItems =
-    [{
-        id: 1,
-        name: "Chicken Fry",
-        image:
-            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
-        categories: ["Cafe", "Bar"],
-        price: "$4.5",
-        reviews: 1244,
-        rating: 4.5,
-    }, {
-        id: 2,
-        name: "Chicken Fry",
-        image:
-            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
-        categories: ["Cafe", "Bar"],
-        price: "$2.50",
-        reviews: 1244,
-        rating: 4.5,
-    }, {
-        id: 3,
-        name: "Chicken Fry",
-        image:
-            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
-        categories: ["Cafe", "Bar"],
-        price: "$10.5",
-        reviews: 1244,
-        rating: 4.5,
-    }, {
-        id: 4,
-        name: "Chicken Fry",
-        image:
-            "https://www.indianhealthyrecipes.com/wp-content/uploads/2012/09/andhra-chicken-fry-kodi-vepudu-recipe.jpg.webp",
-        categories: ["Cafe", "Bar"],
-        price: "$15.5",
-        reviews: 1244,
-        rating: 4.5,
-    }]
 
-export default function MenuItems({ restaurantname }) {
+export default function MenuItems({ restaurantname, foods, hideCheckBox }) {
+    console.log("box",hideCheckBox)
+
     const dispatch = useDispatch();
     const selectedItem = (item, checkboxValue) =>
         dispatch({
@@ -63,16 +27,18 @@ export default function MenuItems({ restaurantname }) {
         Boolean(cartItems.find((item) => item.id === food.id));
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
-            {menuItems.map((item, i) => (
+            {foods.map((item, i) => (
                 <View key={i}>
                     <View >
                         <View style={styles.menuItemStyle}>
-                            <BouncyCheckbox
+                            {hideCheckBox   ? (
+                                <></>
+                            ) : (<BouncyCheckbox
                                 iconStyle={{ borderColor: "lightgray", borderRadius: 0, }}
                                 fillColor="green"
                                 isChecked={isFoodInCart(item, cartItems)}
                                 onPress={(checkboxValue) => selectedItem(item, checkboxValue)}
-                            />
+                            />)}
                             <MenuItemInfo food={item} />
                             <MenuItemImage food={item} />
                         </View>
@@ -103,7 +69,7 @@ const MenuItemInfo = (props) => {
     return (
         <View style={{ width: 240, justifyContent: "space-evenly" }}>
             <Text style={styles.titleStyle}>{props.food.name}</Text>
-            <Text>{props.food.name}</Text>
+            <Text>{props.food.description}</Text>
             <Text>{props.food.price}</Text>
         </View>
     )
